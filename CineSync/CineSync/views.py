@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def mostrar_inicio(request):
-    return render(request, 'home.html')
+def mostrar_colores(request):
+    return render(request, 'colores.html')
