@@ -14,7 +14,7 @@
 
 body{
     height: 100vh;
-    background: url(/static/img/Fondo.jpg);
+    background: #13151a;
 }
 
 ul{
@@ -49,21 +49,13 @@ ul li {
 }
 .cuadrito1{
 
-    background-color: rgb(45, 172, 45);
+    background-color: rgb(0, 239, 163);
 }
 
 .cuadrito2{
-    background-color: rgb(245, 245, 76);
+    background-color: rgb(232, 47, 192);
 }
 
 .cuadrito3{
-    background-color: rgb(212, 66, 66);
-}
-
-.cuadrito4{
-    background-color: rgb(68, 85, 233);
-}
-
-.cuadrito5{
-    background-color: rgb(223, 179, 59);
+    background-color: #13151a;
 }
