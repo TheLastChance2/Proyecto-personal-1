@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.mostrar_colores),
+    path('base/', views.mostrar_base),
 ]
