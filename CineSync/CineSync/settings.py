@@ -37,7 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_forms", #Extensión para estilizar formularios.
+    "crispy_bootstrap4", #La extensión funciona con base en Bootstrap 4.
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4" #Código de la extensión para estilizar formularios.
+
+CRISPY_TEMPLATE_PACK = "bootstrap4" #Código de la extensión para estilizar formularios.
+
+LOGIN_REDIRECT_URL = '/home/' #Redirige al usuario al HOME luego de iniciar sesión.
+
+LOGIN_URL = '/accounts/login/' #Redirige al usuario al formulario de inicio de sesión en caso de ser necesario.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

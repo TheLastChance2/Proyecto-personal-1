@@ -1,8 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
+from .forms import CustomUserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 def mostrar_colores(request):
     return render(request, 'colores.html')
+
+def mostrar_registro(request):
+	data = {
+		'form': CustomUserCreationForm()
+	}
+
+	if request.method == 'POST':
+		formulario = CustomUserCreationForm(data=request.POST)
+		if formulario.is_valid():
+			formulario.save()
+			user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+			login(request,user)
+			messages.success(request, "El registro se ha completado correctamente")
+			return redirect(to="inicio")
+	return render(request, 'registration/registro.html', data)
 
 def mostrar_home(request, pagina=1):
 

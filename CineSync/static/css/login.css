@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,100&display=swap');
+
+*{
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html body{
+	background: url(/static/img/Fondo.jpg);
+}
+
+label{
+	color:green;
+	font-family: 'Roboto', sans-serif;
+}
+
+.contenedor_general{
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;		
+}
+
+form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.contenedor_formulario_principal .contenedor_formulario h2{
+	font-family: 'Poppins', sans-serif;
+	color: #54e189;
+	text-decoration: underline;
+	text-shadow: 0px 0px 2px #0fc259;
+}
+
+.caja_registro{
+	width: 80vw;
+	height: 80vh;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	background-color: #1a1b1c;
+	box-shadow: 0px 0px 15px #54e189;
+}
+
+.contenedor_formulario{
+	height: 80%;
+	width: 85%;
+	border-radius: 10px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;	
+	box-shadow: 0px 0px 15px black;
+}
+
+.contenedor_formulario_principal{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contenedor_campos input{
+	width: 300px;
+}
+
+.contenedor_logo a {
+  display: flex; /* Importante para evitar desconfiguraciones */
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor_logo a, img{
+	height: 85%; 
+	width: auto; 
+	filter: drop-shadow(0px 0px 0px transparent);
+	transition:  filter 1s ease, scale 2s ease, transform 0.8s ease;
+}
+
+.contenedor_logo:hover img {
+  filter: drop-shadow(0px 0px 8px green); /* Cambiar el filtro al pasar el cursor sobre el contenedor */
+  transform: scale(1.1);
+}
+
+
