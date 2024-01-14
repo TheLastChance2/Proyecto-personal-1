@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,25 +7,71 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilo_base.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-</head>
-<body>
+    <link rel="icon" href="{% static 'favicon1.ico'%}">
     
-    <nav>
+</head>
+
+
+<body>
+    <!--------------------< !Comienzo del Navbar <-------------------->
+        <nav>
             <div class="navbarclase">
-            <div class="nav-logo"></div>
-            <span>
-                <h1 class="name1">Cine</h1>
-            </span>
-            <span>
-                <h1 class="name2">Sync</h1>
-            </span>
+                <a href="/home/"><div class="nav-logo"></div></a>
+                <div class="text-logo">
+                <span>
+                    <h1 class="name1">Cine</h1>
+                </span>
+                <span >
+                    <h1 class="name2">Sync</h1>
+                </span>
+            </div>
                 <ul class="listanavbar">
-                    <li>
-                        Culo
+                    <li class="claseli">
+                        <a class="nav-menu" href="#">
+                            <i class="fa-solid fa-house icon" style="color: #FDE047;"></i>
+                            Inicio
+                        </a>
+                    </li>
+                    <li class="claseli dropdown">
+                        <a class="nav-menu" href="#">
+                            <i class="fa-solid fa-film" style="color: #FDE047;"></i>
+                            Películas
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#">Miedo</a>
+                            <a href="#">Susto</a>
+                            <a href="#">Terror</a>
+                            <a href="#">Scream</a>
+                            <a href="#">Horror</a>
+                        </div>
+                    </li>
+                    <li class="claseli">
+                        <a class="nav-menu" href="#">
+                            <i class="fa-solid fa-tv" style="color: #FDE047;"></i>
+                            Series
+                        </a>
+                    </li>
+                    <li class="claseli dropdown">
+                        <a class="nav-menu" href="#">
+                            <i class="fa-solid fa-user" style="color: #FDE047;"></i>
+                            Cuenta
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#">Mi Perfil</a>
+                            <a href="#">Configuración</a>
+                            <a href="#">Cerrar Sesión</a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </nav>
 
+    <!--------------------< fin del Navbar <-------------------->
+        
 </body>
+
+
 </html>
+<script src="https://kit.fontawesome.com/c9ffc7d225.js" crossorigin="anonymous"></script>
+       {% block content %}
+        {% endblock %}

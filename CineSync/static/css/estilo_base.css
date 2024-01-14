@@ -4,7 +4,7 @@
 
 body {
     background: #13151a;
-    overflow: hidden;
+    
 }
 * {
     margin: 0 ;
@@ -22,44 +22,110 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 15vh;
+    overflow: hidden;
 
 }
 
 .navbarclase{
-    height: 80%;
-    width: 90%;
+    height: 80px;
+    width: 1080px;
     /* background-color: aqua; */
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-}
-
-.listanavbar{
-    list-style: none;
+    min-width: 3vw;
     
 }
 
-.listanavbar li{
-    padding-left:3px;
-    padding-right:3px;
+.listanavbar{
+    padding-left: 440px;
+    list-style: none;
+}
 
+.listanavbar .claseli{
+    display: inline-block;
+    font-weight: 500;
+    padding: 3px;
+}
+
+.nav-menu {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+.nav-menu:hover {
+    transform: scale(1.1);
 }
 
 .nav-logo{
-    height: 5rem;
+    min-width: 3vw;
+    height: 4rem;
     content:url(/static/img/LogoB.png);
+    filter: drop-shadow(0px 0px 0px transparent);
     box-sizing: border-box;
+    transition:  filter 1s ease, scale 2s ease, transform 0.8s ease;
 }
 
+.nav-logo:hover{
+    filter: drop-shadow(0px 0px 8px green); 
+    transform: scale(1.1);
+}
 
 .name1 {
+    display: inline-block;
     padding-left: 6px;
     font-family: 'Poppins', sans-serif;
     color: #fff;
+    
+}
+
+.text-logo:hover {
+    transform: scale(1.1);
+
 }
 
 .name2 {
     font-family: 'Poppins', sans-serif;
     color: rgb(0, 239, 163);
+    
 }
 
+.text-logo {
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+}
+
+
+
+/*-------------< Comienzo del CSS del menu desplegable del Navbar >-------------*/
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1a1b1c;
+    min-width: 110px;
+    /* box-shadow: 0 4px 8px rgba(151, 168, 38, 0.365); */
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #3A3B3C;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    text-align: center;
+}
+
+
+/*-------------< Fin del CSS del menu desplegable del Navbar>-------------*/

@@ -7,6 +7,9 @@ from django.contrib import messages
 def mostrar_colores(request):
     return render(request, 'colores.html')
 
+def mostrar_base(request):
+    return render(request, 'base.html')
+
 def mostrar_registro(request):
 	data = {
 		'form': CustomUserCreationForm()
@@ -32,7 +35,7 @@ def mostrar_home(request, pagina=1):
 
         * Le damos un valor predeterminado a la variable que almacenará los datos recibidos de la API en forma de lista.
 
-        * Definimos la pagina de peliculas-series mostradas.  
+        * Definimos la pagina de peliculas-series mostradas. 
 
     ------------------------------------------------------------------------------------------------------------------- """
 
@@ -41,7 +44,7 @@ def mostrar_home(request, pagina=1):
     except ValueError:
         pagina = 1
 
-    url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={pagina}&sort_by=popularity.desc"
+    url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
     url_series = f"https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
 
 
