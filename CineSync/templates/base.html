@@ -38,9 +38,9 @@
                             Películas
                         </a>
                         <div class="dropdown-content">
-                            <a href="#">Miedo</a>
-                            <a href="#">Susto</a>
                             <a href="#">Terror</a>
+                            <a href="#">Drama</a>
+                            <a href="#">Messi</a>
                             <a href="#">Scream</a>
                             <a href="#">Horror</a>
                         </div>
@@ -67,11 +67,44 @@
         </nav>
 
     <!--------------------< fin del Navbar <-------------------->
+
+
+    {% block content %} {% endblock %}
+
+
+
+
+
+    <!--------------------< Inicio de Footer <-------------------->
+
+        <footer>
+            <div class="box-footer">
+                <ul class="listanavbar-footer">
+                    <li class="claseli-footer">
+                        <a href=""><i class="fa-brands fa-github icon" style="color: #FFD43B;"></i></a>
+                    </li>
+                    <li class="claseli-footer">
+                        <a href=""><i class="fa-brands fa-facebook icon" style="color: #FFD43B;"></i></a>
+                    </li>
+                    <li class="claseli-footer">
+                       <a href=""> <i class="fa-brands fa-x-twitter icon" style="color: #FFD43B;"></i></a>
+                    </li>
+                    <li class="claseli-footer">
+                      <a href="">  <i class="fa-brands fa-instagram icon" style="color: #FFD43B;"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+
+
+    <!--------------------< Fin del Footer<-------------------->
+
+
         
 </body>
 
 
 </html>
 <script src="https://kit.fontawesome.com/c9ffc7d225.js" crossorigin="anonymous"></script>
-       {% block content %}
-        {% endblock %}
+    
