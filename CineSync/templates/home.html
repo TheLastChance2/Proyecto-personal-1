@@ -9,6 +9,8 @@
     <title>Home</title>
 </head>
 <body>
-    
+    {% for pelicula in peliculas %}
+        <p style="color: white;">{{ pelicula.title }}</p>
+    {% endfor %}
 </body>
 </html>
