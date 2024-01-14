@@ -9,8 +9,13 @@
     <title>Home</title>
 </head>
 <body>
+    <h1 style="color: white;">PELICULAS POPULARES</h1>
     {% for pelicula in peliculas %}
-        <p style="color: white;">{{ pelicula.title }}</p>
+    <img src="{{ pelicula.imagen_url }}" alt="Poster de la película">
+    {% endfor %}
+    <h1 style="color: white;">SERIES POPULARES</h1>
+    {% for serie in series %}
+        <img src="{{ serie.imagen_url }}" alt="Poster de la serie">
     {% endfor %}
 </body>
 </html>
