@@ -80,10 +80,10 @@ nav{
     
 }
 
-.text-logo:hover {
+/* .text-logo:hover {
     transform: scale(1.1);
 
-}
+} */
 
 .name2 {
     font-family: 'Poppins', sans-serif;
@@ -106,6 +106,7 @@ nav{
     background-color: #1a1b1c;
     min-width: 110px;
     z-index: 1;
+    transition: transform 0.3s ease-in-out;
 }
 
 .dropdown-content a {
@@ -114,15 +115,18 @@ nav{
     text-decoration: none;
     display: block;
     font-size: 14px;
+    
 }
 
 .dropdown-content a:hover {
     background-color: #3A3B3C;
+   
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
     text-align: center;
+   
 }
 
 /* todo-------------< Fin del CSS del menu desplegable del Navbar>-------------*/
@@ -158,4 +162,11 @@ footer {
     display: inline-block;
     font-size: 30px;
     padding: 10px;
+    filter: drop-shadow(0px 0px 0px transparent);
+    transition:  filter 1s ease, scale 2s ease, transform 0.8s ease;
+}
+
+.listanavbar-footer .claseli-footer:hover {
+    filter: drop-shadow(0px 0px 8px #FDE047); 
+    transform: scale(1.1);
 }
