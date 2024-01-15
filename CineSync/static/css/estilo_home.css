@@ -2,39 +2,190 @@ body{
     background-color: #13151a;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* !_--__--__--__--__--__--__--__--__--_Start Grid _--__--__--__--__--__--__--__--__--__--_ */
+.box-section {
+    width: 100%;
+    height: 625px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.box-section {
-    width: 100vw;
+.box-grid {
+    display: grid;
+    /* background-color: rgb(28, 6, 108); */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    gap: 10px;
+    padding: 3px;
+    box-sizing: border-box;
+    width: 80%;
+    height: 580px;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+
+.box-grid .search-box {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+
+
+
+
+.box-grid .columna2 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+.box-grid .columna3 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 8;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+.box-grid .columna4 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 13;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+.box-grid .columna5 {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 13;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+.box-grid .columna6 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 8;
+    grid-row-end: 13;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+.box-grid .columna7 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 8;
+    grid-row-end: 13;
+    border: 2px solid #4d4c4c;
+    border-radius: 6px;
+}
+
+
+/* !_--__--__--__--__--__--__--__--__--_End Grid _--__--__--__--__--__--__--__--__--__--_ */
+
+
+
+/* *_--__--__--__--__--__--__--__--__--_ Start Content Grid _--__--__--__--__--__--__--__--__--__--_ */
+
+.search-box {
+    background-color: #fff;
+    color: #4d4c4c;
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.search-box input {
+    color: #4d4c4c;
+    width: 80%;
+    height: 60%;
+    border-radius: 0 0 0 6px;
+    border: none;
+    padding-right: 35px;
+    padding: 10px;
+    outline: 0;
+    background-color: #DDD;
+    
+}
+.button-search{
+    background-color:#DDD;
+    width: 54px;
+    height: 49px;
+    border: none;
+}
+
+.button-search .icon {
+    transition: transform 0.2s ease-in-out;
+    font-size: 24px;
+}
+
+.button-search .icon:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+/* *_--__--__--__--__--__--__--__--__--_ End Content Grid _--__--__--__--__--__--__--__--__--__--_ */
+
+
+
+
+
+
+
+
+main{
+    width: 1000px;
+}
+
+main img{
+    width: 187.5px;
+    height: 281px;
+}
+
+.contenedor_contenidos{
+    flex-wrap: wrap;
+    width: 60%;
+    height: auto;
+}
+
+.seccion_contenido{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.lateral{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    background-color: white;
+}
 
-body {
-    --sb-track-color: #232E33;
-    --sb-thumb-color: #6BAF8D;
-    --sb-size: 10px;
-  
-    scrollbar-color: var(--sb-thumb-color) 
-                     var(--sb-track-color);
-  }
-  
-  body::-webkit-scrollbar {
-    width: var(--sb-size) 
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: var(--sb-track-color);
-    border-radius: 10px;
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background: var(--sb-thumb-color);
-    border-radius: 10px;
-    
-    }
-
-
-
+.datos_curiosos{
+    height: 150px;
+    width: 150px;
+    background-color: white;
+}
+.memes{
+    height: 150px;
+    width: 150px;
+    background-color: white;
+}
