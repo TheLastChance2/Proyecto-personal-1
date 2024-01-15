@@ -1,3 +1,47 @@
 body{
     background-color: #13151a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main{
+    width: 1000px;
+}
+
+main img{
+    width: 187.5px;
+    height: 281px;
+}
+
+.contenedor_contenidos{
+    flex-wrap: wrap;
+    width: 60%;
+    height: auto;
+}
+
+.seccion_contenido{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lateral{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    background-color: white;
+}
+
+.datos_curiosos{
+    height: 150px;
+    width: 150px;
+    background-color: white;
+}
+.memes{
+    height: 150px;
+    width: 150px;
+    background-color: white;
 }
