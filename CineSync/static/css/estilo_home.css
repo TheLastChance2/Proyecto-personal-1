@@ -41,9 +41,7 @@ body{
 }
 
 
-
-
-.box-grid .columna2 {
+.box-grid .profile-grid {
     grid-column-start: 3;
     grid-column-end: 5;
     grid-row-start: 1;
@@ -100,43 +98,47 @@ body{
 /* *_--__--__--__--__--__--__--__--__--_ Start Content Grid _--__--__--__--__--__--__--__--__--__--_ */
 
 .search-box {
-    background-color: #fff;
-    color: #4d4c4c;
+    background-color: rgba(255, 255, 255, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;;
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 
-.search-box input {
-    color: #4d4c4c;
-    width: 80%;
-    height: 60%;
-    border-radius: 0 0 0 6px;
-    border: none;
-    padding-right: 35px;
-    padding: 10px;
-    outline: 0;
-    background-color: #DDD;
+.profile-grid {
+    background: #00c3ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FDE047, #00efa3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FDE047, #00efa3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
     
 }
-.button-search{
-    background-color:#DDD;
-    width: 54px;
-    height: 49px;
-    border: none;
+
+.login-grid {
+    display: block;
+    width: 50%;
+    height: 100%;
 }
 
-.button-search .icon {
-    transition: transform 0.2s ease-in-out;
-    font-size: 24px;
+
+.imagen-profile-grid {
+    display: flex;
+    justify-content:center;
+    width: 50%;
+    height: 100%;
+
+}
+.imagen-profile-grid img {
+    width: 62px;
+    height: 62px;
+    border-radius: 100%;
+    border: 0.15px solid #080606;
+
 }
 
-.button-search .icon:hover {
-    transform: scale(1.1);
-}
+
+
 
 
 

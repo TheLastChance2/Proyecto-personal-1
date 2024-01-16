@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilo_home.css' %}">
+    
     <title>Home</title>
 </head>
 
@@ -19,10 +20,27 @@
         <header class="box-grid">   
             <div class="search-box">
                 
-                <input type="search" placeholder="Buscar... ">
-                <button class="button-search"><i class="fa-solid fa-magnifying-glass icon" style="color: rgb(0, 239, 163);"></i></button>
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container-fluid ">
+                      <form class="d-flex" role="search">
+                        <input class="form-control me-5" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                    </div>
+                  </nav>
             </div>
-            <div class="columna2">2</div>
+
+
+
+            <div class="profile-grid">
+                <div class="login-grid">
+                    <a href="#">Iniciar Sesion</a>
+                </div>
+                <div class="imagen-profile-grid">
+                <img src="{% static 'img/Messi.jpg'%}" alt="Foto de prueba">
+            </div>
+
+            </div>
             <div class="columna3">3</div>
             <div class="columna4">4</div>
             <div class="columna5">5</div>
