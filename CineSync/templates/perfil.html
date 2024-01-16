@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERFIL</title>
+</head>
+<body>
+    <h1>Perfil de {{ request.user.username }}</h1>
+
+    <img src="{{ user_profile.profile_picture.url }}" alt="Imagen de perfil">
+    
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>
