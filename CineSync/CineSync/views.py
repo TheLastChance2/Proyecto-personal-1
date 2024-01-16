@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import requests
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
@@ -44,8 +44,8 @@ def mostrar_home(request, pagina=1):
     except ValueError:
         pagina = 1
 
-    url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
-    url_series = f"https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
+    url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
+    url_series = f"https://api.themoviedb.org/3/discover/tv?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
 
 
     headers = {
@@ -102,5 +102,55 @@ def mostrar_home(request, pagina=1):
     return render(request, 'home.html', {'peliculas': datos_peliculas, 'series': datos_series, 'pagina_actual': pagina})
 
 
-def mostrar_detalles(request):
-    return render(request, 'pelicula_detalle.html')
+def mostrar_detalles(request, pelicula_id):
+    url_info = f"https://api.themoviedb.org/3/movie/{pelicula_id}?language=es-ES"
+    url_imagenes = f"https://api.themoviedb.org/3/movie/{pelicula_id}/images"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZGNhYmMwNjA0YzVkZWE5NTBjYzNiYzM3MmIzZmRkZSIsInN1YiI6IjY1OTRkOGQ0MGU2NGFmMTJlMjhjMWIwMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tbbbluAx9E1p9aQ5ID93hGxzKwLmYuXID_g0J_Ww2tk"
+    }
+
+
+
+    # Obtener información de la película
+    respuesta_info = requests.get(url_info, headers=headers)
+    pelicula_info = respuesta_info.json() if respuesta_info.status_code == 200 else None
+
+    # Obtener imágenes de la película
+    respuesta_imagenes = requests.get(url_imagenes, headers=headers)
+    imagenes = respuesta_imagenes.json().get('backdrops', []) if respuesta_imagenes.status_code == 200 else []
+
+    if pelicula_info and 'poster_path' in pelicula_info:
+        base_url_imagen = "https://image.tmdb.org/t/p/original"
+        pelicula_info['imagen_url'] = f"{base_url_imagen}{pelicula_info['poster_path']}"
+    else:
+        pelicula_info['imagen_url'] = None
+
+    return render(request, 'pelicula_detalle.html', {'pelicula': pelicula_info, 'imagenes': imagenes})
+    
+    
+def mostrar_detalles_serie(request, serie_id):
+    url_info = f"https://api.themoviedb.org/3/tv/{serie_id}?language=es-ES"
+    url_imagenes = f"https://api.themoviedb.org/3/tv/{serie_id}/images"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZGNhYmMwNjA0YzVkZWE5NTBjYzNiYzM3MmIzZmRkZSIsInN1YiI6IjY1OTRkOGQ0MGU2NGFmMTJlMjhjMWIwMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tbbbluAx9E1p9aQ5ID93hGxzKwLmYuXID_g0J_Ww2tk"
+    }
+
+    # Obtener información de la serie
+    respuesta_info = requests.get(url_info, headers=headers)
+    serie_info = respuesta_info.json() if respuesta_info.status_code == 200 else None
+
+    # Obtener imágenes de la serie
+    respuesta_imagenes = requests.get(url_imagenes, headers=headers)
+    imagenes = respuesta_imagenes.json().get('backdrops', []) if respuesta_imagenes.status_code == 200 else []
+
+    if serie_info and 'poster_path' in serie_info:
+        base_url_imagen = "https://image.tmdb.org/t/p/original"
+        serie_info['imagen_url'] = f"{base_url_imagen}{serie_info['poster_path']}"
+    else:
+        serie_info['imagen_url'] = None
+
+    return render(request, 'detalles_serie.html', {'serie': serie_info, 'imagenes': imagenes})

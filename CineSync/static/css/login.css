@@ -73,7 +73,7 @@ form{
 }
 
 .contenedor_logo a {
-  display: flex; /* Importante para evitar desconfiguraciones */
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -86,7 +86,7 @@ form{
 }
 
 .contenedor_logo:hover img {
-  filter: drop-shadow(0px 0px 8px green); /* Cambiar el filtro al pasar el cursor sobre el contenedor */
+  filter: drop-shadow(0px 0px 8px green);
   transform: scale(1.1);
 }
 

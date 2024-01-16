@@ -10,11 +10,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilo_pelicula_detalle.css'%}">
-    <title>{{ pelicula.title }}</title>
+    <title>{{ serie.name }}</title>
 </head>
 <body>
     <main>
-        <header style="width: 1050px; height: 700px; background-size: cover; background-position: center; background-image: url(https://image.tmdb.org/t/p/original{{ imagenes.0.file_path }});">
+        <header style="width: 1050px; height: 700px; background-size: cover; background-position: center; background-image: url(https://image.tmdb.org/t/p/original{{ imagenes.0.file_path }})">
+        
+
+
+
             
         </header> 
         <section class="seccion2">

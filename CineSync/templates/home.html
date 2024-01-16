@@ -39,15 +39,26 @@
         <section class="seccion_contenido">
             <div class="contenedor_contenidos">
                 {% for pelicula in peliculas %}
-                <img src="{{ pelicula.imagen_url }}" alt="Poster de la película">
+                  <a href="{% url 'detalles_pelicula' pelicula.id %}">
+                    <article> 
+                      <div class="poster_pelicula">
+                        <img src="{{ pelicula.imagen_url }}" alt="Poster de la película">
+                      </div>
+
+                      <div class="imagen_vermas">
+                        <img src="/static/img/Lupa.png" alt="VER MÁS">
+                      </div>
+                    </article> 
+                  </a> 
                 {% endfor %}
+                
             </div>
             <div class="lateral">
                 <div class="datos">
                     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
                         <div class="carousel-inner">
                           <div class="carousel-item active">
-                            <img src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt12dbddde5342ce4c/648866ff21a8556da61fa167/GOAL_-_Blank_WEB_-_Facebook_-_2023-06-13T135350.847.png?auto=webp&format=pjpg&width=3840&quality=60" class="d-block w-100" alt="...">
+                            <img src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt12dbddde5342ce4c/648866ff21a8556da61fa167/GOAL_-_Blank_WEB_-_Facebook_-_2023-06-13T135350.847.png?auto=webp&format=pjpg&width=3840&quality=60" class="d-block w-100"  alt="...">
                           </div>
                           <div class="carousel-item">
                             <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2023binary_LYNXMPEJB70GU-FILEDIMAGE.jpg?w=1220&h=674&crop=1" class="d-block w-100" alt="...">
@@ -68,7 +79,7 @@
                 </div>
 
                 <div class="datos">
-                    <p>MEMES</p>
+             
                 </div>
             </div>
         </section>
@@ -77,17 +88,26 @@
 
         <section class="seccion_contenido">
             <div class="contenedor_contenidos">
-                {% for serie in series %}
-                    <img src="{{ serie.imagen_url }}" alt="Poster de la serie">
-                {% endfor %}
+              {% for serie in series %}
+              <a href="{% url 'detalles_serie' serie.id %}">
+                <article>   
+                    <div class="poster_pelicula">
+                      <img src="{{ serie.imagen_url }}" alt="Poster de la serie">
+                    </div>
+                    <div class="imagen_vermas">
+                      <img src="/static/img/Lupa.png" alt="Esta democracia si sirve">
+                    </div>
+                </article>
+              </a>
+              {% endfor %}      
             </div>
+
             <div class="lateral">
                 <div class="datos">
-                    <p>HOLA</p>
-                 </div>
+                </div>
 
                 <div class="datos">
-                    <p>MEMES</p>
+
                 </div>
             </div>
         </section>
