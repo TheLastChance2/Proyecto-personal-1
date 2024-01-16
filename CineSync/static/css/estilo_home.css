@@ -144,12 +144,6 @@ body{
 /* *_--__--__--__--__--__--__--__--__--_ End Content Grid _--__--__--__--__--__--__--__--__--__--_ */
 
 
-
-
-
-
-
-
 main{
     width: 1100px;
 }
@@ -176,18 +170,36 @@ main img{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.datos{
     height: 300px;
     width: 300px;
     background-color: white;
+    margin-bottom: 10px;
 }
 
-.datos_curiosos{
-    height: 100px;
-    width: 100px;
-    background-color: dark;
+.itemCarrusel{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border: 1px solid black;
 }
-.memes{
-    height: 100px;
-    width: 100px;
-    background-color: dark;
+
+.tarjetaCarrusel{
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
 }
+
+.flechasCarrusel{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
