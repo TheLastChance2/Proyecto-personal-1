@@ -1,7 +1,3 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-
 body {
     background: #13151a;
     
@@ -10,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif ;
     color: white;
 }
     /* !---------------- Styles Navbar Css ---------------- */
@@ -21,8 +16,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 15vh;
-    overflow: hidden;
     border-bottom: 1px solid #4d4c4c;
+    
 
 }
 
@@ -38,6 +33,7 @@ body {
 .listanavbar{
     padding-left: 440px;
     list-style: none;
+    margin-bottom: 0;
 }
 
 .listanavbar .claseli{
@@ -58,7 +54,7 @@ body {
 }
 
 .nav-logo{
-    min-width: 3vw;
+    min-width: 3rem;
     height: 4rem;
     content:url(/static/img/LogoB.png);
     filter: drop-shadow(0px 0px 0px transparent);
@@ -72,30 +68,28 @@ body {
 }
 
 .name1 {
-    display: inline-block;
+    font-size: 1.6rem;
     padding-left: 6px;
-    font-family: 'Poppins', sans-serif;
     color: #fff;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0;
+    font-weight: 500;
     
 }
-
-/* .text-logo:hover {
-    transform: scale(1.1);
-
-} */
-
 .name2 {
-    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
     color: rgb(0, 239, 163);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0;
+    font-weight: 500;
     
 }
 
 .text-logo {
     transition: transform 0.3s ease-in-out;
     display: flex;
+    font-weight: 500;
 }
-
-
 
 /**-------------< Comienzo del CSS del menu desplegable del Navbar >-------------*/
 
@@ -126,6 +120,10 @@ body {
     display: block;
     text-align: center;
    
+}
+
+.nav-menu{
+    color: white;
 }
 
 /* *-------------< Fin del CSS del menu desplegable del Navbar>-------------*/

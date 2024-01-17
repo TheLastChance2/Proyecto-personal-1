@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,20 +10,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilo_pelicula_detalle.css'%}">
-    <title>TITULO DE LA PELICULA</title>
+    <title>{{ pelicula.title }}</title>
 </head>
 <body>
-    <header>
-        <h1>NAVBAR</h1>
-    </header>
-
     <main>
-    
+        <header style="width: 1050px; height: 700px; background-size: cover; background-position: center; background-image: url(https://image.tmdb.org/t/p/original{{ imagenes.0.file_path }});">
+            
+        </header> 
+        <section class="seccion2">
+            <p>hola</p>
+        </section>   
+        <section class="seccion3">
+            <p>hola</p>
+        </section> 
     </main>
-
-    <footer>
-        
-    </footer>
-
 </body>
 </html>
+
+{% endblock %}
