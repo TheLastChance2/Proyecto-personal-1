@@ -16,39 +16,60 @@
 <body>
 
     <!-- /* !_--__--__--__--__--__--__--__--__--_Start Grid _--__--__--__--__--__--__--__--__--__--_ */ -->
-   <section class="box-section">
-        <header class="box-grid">   
-            <div class="search-box">
-                <div class="container-fluid">
-                  <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Se curioso y buscá boludito🔍" aria-label="Search">
-                    <button class="btn btn-outline-warning" type="submit">Buscar</button>
-                  </form>
-                </div>
+    <section class="box-section">
+          <header class="box-grid">   
+              <div class="search-box">
+                  <div class="container-fluid">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Buscar🔍..." aria-label="Search">
+                      <button class="Button-search" type="submit" style="font-size: 25px;"><i class="fa-solid fa-magnifying-glass icon-search" ></i></button>
+                    </form>
+                  </div>
+              </div>
+              {% if user.is_authenticated %}
+            <div class="profile-grid1"> <!--Este sirve para cuando el usuario está logueado-->
+              <div class="image-profile">
+                <img src="{% static 'img/milei.png' %}" alt="Foto de perfil">
+              </div>
+              <div class="text-bienvenida">
+                <p>Bienvenido/a<strong>🧉</strong></p>
+                <p class="name-usuario">Perez, Elías Leonel</p>
+              </div>
+              <div class="profile-icons">
+                <a href="#"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
+              <a href="#"><i class="fa-solid fa-gear" style="color: #000000;"></i></a>
+              <a href="#"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i></a>
+              
+              </div>
             </div>
-            {% if user.is_authenticated %}
-          <div class="profile-grid1">
-            a
-          </div>
-          {% else %}
-          <div class="profile-grid2">
-            b
-          </div>
-          {% endif %}
-            <div class="columna3">3</div>
-            <div class="columna4">4</div>
-            <div class="columna5">5</div>
-            <div class="columna6">6</div>
-            <div class="columna7">7</div>
-            <div class="columna8">8</div>
-            <div class="columna9">9</div>
-        </header>
-   </section>
+            {% else %}
+            <div class="profile-grid2"> <!--Este sirve para cuando el usuario no esta logueado -->
+              <div class="login">
+                <div class="text-login">
+                <a href="#">Iniciar Sesión</a>
+              </div>
+              </div>
+              <div class="button-register">
+                <div class="text-register">
+                <a href="#">Registrarse</a>
+              </div>
+              </div>
+            </div>
+            {% endif %}
+              <div class="columna3">3</div>
+              <div class="columna4">4</div>
+              <div class="columna5">5</div>
+              <div class="columna6">6</div>
+              <div class="columna7">7</div>
+              <div class="columna8">8</div>
+              <div class="columna9">9</div>
+          </header>
+    </section>
    <!-- /* !_--__--__--__--__--__--__--__--__--_End Grid _--__--__--__--__--__--__--__--__--__--_ */ -->
 
     <main>
 
-        <h1 style="color: white;">PELICULAS POPULARES 😎</h1>
+        <h1 class="titulo-pelis" style="color: white;">PELICULAS POPULARES 😎</h1>
 
         <section class="seccion_contenido">
             <div class="contenedor_contenidos">
@@ -98,7 +119,7 @@
             </div>
         </section>
 
-        <h1 style="color: white;">SERIES POPULARES 📺</h1>
+        <h1 class="titulo-pelis" style="color: white;">SERIES POPULARES 📺</h1>
 
         <section class="seccion_contenido">
             <div class="contenedor_contenidos">
@@ -127,7 +148,12 @@
         </section>
 
     </main>
+
+
+
 </body>
 </html>
 
 {% endblock %}
+
+
