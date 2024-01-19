@@ -25,28 +25,19 @@ def mostrar_registro(request):
 			return redirect(to="inicio")
 	return render(request, 'registration/registro.html', data)
 
+import requests
+from django.shortcuts import render
+
 def mostrar_home(request, pagina=1):
-
-    """ -------------------------------------------------------------------------------------------------------------------
-        
-        * Convocamos la URL y los headers brindados por la API, las cuales dan especificaciones a python de cómo se almacena y muestra la información.
-
-        * Solicitamos los datos mediante la función requests y haciendo uso del metodo GET de HTTP.
-
-        * Le damos un valor predeterminado a la variable que almacenará los datos recibidos de la API en forma de lista.
-
-        * Definimos la pagina de peliculas-series mostradas. 
-
-    ------------------------------------------------------------------------------------------------------------------- """
 
     try:
         pagina = int(pagina)
     except ValueError:
         pagina = 1
 
+    # URLs sin per_page
     url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
     url_series = f"https://api.themoviedb.org/3/discover/tv?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
-
 
     headers = {
         "accept": "application/json",
@@ -59,23 +50,11 @@ def mostrar_home(request, pagina=1):
     datos_peliculas = []
     datos_series = []
 
-    """ -------------------------------------------------------------------------------------------------------------------
-
-        ?El código de estado HTTP 200 es un estándar que indica una respuesta exitosa a una solicitud. 
-        
-        *En este if se almacena la información en las variables 'datos_peliculas' y datos_series luego de confirmar que la solicitud fue exitosa.
-        *Esto se hace mediante el método 'json()', el cuál pasa los datos recibidos de formato JSON (Como esta almacenado en la API) al formato de una estructura de datos de python.
-
-        En las estructuras for se importan las imagenes 'cover' que se encuentran en urls diferentes a la de los datos 
-        anteriores. Se importan solo las versiones de calidad w500 para evitar lentitud en la carga de la pagina
-
-    ------------------------------------------------------------------------------------------------------------------- """
-
     if solicitud_peliculas.status_code == 200:
-        datos_peliculas = solicitud_peliculas.json().get('results', [])
+        datos_peliculas = solicitud_peliculas.json().get('results', [])[:10]  
 
     if solicitud_series.status_code == 200:
-        datos_series = solicitud_series.json().get('results', [])
+        datos_series = solicitud_series.json().get('results', [])[:10]  
     
     base_url_imagen = "https://image.tmdb.org/t/p/w500"
 
@@ -91,15 +70,27 @@ def mostrar_home(request, pagina=1):
         else:
             dato['imagen_url'] = None
 
-    """ -------------------------------------------------------------------------------------------------------------------
+    base_url_imagen = "https://image.tmdb.org/t/p/w780"
 
-        Devolemos la plantilla de HTML junto a un diccionario de clave única que sirve como nombre que se utilizará
-        para llamar a los datos en la estructura HTML, tanto de las series como de las peliculas y también el de la 
-        pagina por si se requiere mostrarlo. 
+    for pelicula in datos_peliculas:
+        tmdb_id = pelicula.get('id', None)
+        if tmdb_id:
+            images_url = f'https://api.themoviedb.org/3/movie/{tmdb_id}/images?api_key=fZd8qW3Bpej0Zea4Rz2OxSS6XLSNRGJW'
+            images_response = requests.get(images_url, headers=headers)
 
-    ------------------------------------------------------------------------------------------------------------------- """
+            if images_response.status_code == 200:
+                images_data = images_response.json()
+                if 'backdrops' in images_data:
+                    pelicula['imagenes_adicionales'] = [f"{base_url_imagen}{img['file_path']}" for img in images_data['backdrops'][:5]]
+                else:
+                    pelicula['imagenes_adicionales'] = []
+            else:
+                pelicula['imagenes_adicionales'] = []
+        else:
+            pelicula['imagenes_adicionales'] = []
 
     return render(request, 'home.html', {'peliculas': datos_peliculas, 'series': datos_series, 'pagina_actual': pagina})
+
 
 
 def mostrar_detalles(request, pelicula_id):
