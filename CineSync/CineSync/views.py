@@ -28,14 +28,27 @@ def mostrar_registro(request):
 import requests
 from django.shortcuts import render
 
-def mostrar_home(request, pagina=1):
+def obtener_imagenes_adicionales(tmdb_id, tipo, base_url_imagen, headers):
+    url = f'https://api.themoviedb.org/3/{tipo}/{tmdb_id}/images?api_key=fZd8qW3Bpej0Zea4Rz2OxSS6XLSNRGJW'
+    response = requests.get(url, headers=headers)
 
+    if response.status_code == 200:
+        images_data = response.json()
+        return [f"{base_url_imagen}{img['file_path']}" for img in images_data.get('backdrops', [])[:1]]
+    else:
+        return []
+
+
+def mostrar_home(request, pagina=1):
     try:
         pagina = int(pagina)
     except ValueError:
         pagina = 1
 
-    # URLs sin per_page
+    base_url_imagen = "https://image.tmdb.org/t/p/"
+    base_url_imagen_w342 = f"{base_url_imagen}w342"
+    base_url_imagen_w780 = f"{base_url_imagen}w780"
+
     url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
     url_series = f"https://api.themoviedb.org/3/discover/tv?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
 
@@ -47,47 +60,18 @@ def mostrar_home(request, pagina=1):
     solicitud_peliculas = requests.get(url_peliculas, headers=headers)
     solicitud_series = requests.get(url_series, headers=headers)
 
-    datos_peliculas = []
-    datos_series = []
-
-    if solicitud_peliculas.status_code == 200:
-        datos_peliculas = solicitud_peliculas.json().get('results', [])[:10]  
-
-    if solicitud_series.status_code == 200:
-        datos_series = solicitud_series.json().get('results', [])[:10]  
-    
-    base_url_imagen = "https://image.tmdb.org/t/p/w500"
+    datos_peliculas = solicitud_peliculas.json().get('results', [])[:10] if solicitud_peliculas.status_code == 200 else []
+    datos_series = solicitud_series.json().get('results', [])[:10] if solicitud_series.status_code == 200 else []
 
     for dato in datos_peliculas:
-        if 'poster_path' in dato:
-            dato['imagen_url'] = f"{base_url_imagen}{dato['poster_path']}"
-        else:
-            dato['imagen_url'] = None
+        dato['imagen_url'] = f"{base_url_imagen_w342}{dato.get('poster_path', '')}"
+        tmdb_id = dato.get('id', None)
+        dato['imagenes_adicionales'] = obtener_imagenes_adicionales(tmdb_id, 'movie', base_url_imagen_w780, headers)
 
     for dato in datos_series:
-        if 'poster_path' in dato:
-            dato['imagen_url'] = f"{base_url_imagen}{dato['poster_path']}"
-        else:
-            dato['imagen_url'] = None
-
-    base_url_imagen = "https://image.tmdb.org/t/p/w780"
-
-    for pelicula in datos_peliculas:
-        tmdb_id = pelicula.get('id', None)
-        if tmdb_id:
-            images_url = f'https://api.themoviedb.org/3/movie/{tmdb_id}/images?api_key=fZd8qW3Bpej0Zea4Rz2OxSS6XLSNRGJW'
-            images_response = requests.get(images_url, headers=headers)
-
-            if images_response.status_code == 200:
-                images_data = images_response.json()
-                if 'backdrops' in images_data:
-                    pelicula['imagenes_adicionales'] = [f"{base_url_imagen}{img['file_path']}" for img in images_data['backdrops'][:5]]
-                else:
-                    pelicula['imagenes_adicionales'] = []
-            else:
-                pelicula['imagenes_adicionales'] = []
-        else:
-            pelicula['imagenes_adicionales'] = []
+        dato['imagen_url'] = f"{base_url_imagen_w342}{dato.get('poster_path', '')}"
+        tmdb_id = dato.get('id', None)
+        dato['imagenes_adicionales'] = obtener_imagenes_adicionales(tmdb_id, 'tv', base_url_imagen_w780, headers)
 
     return render(request, 'home.html', {'peliculas': datos_peliculas, 'series': datos_series, 'pagina_actual': pagina})
 
