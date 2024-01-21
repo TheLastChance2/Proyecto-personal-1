@@ -9,27 +9,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilo_home.css' %}">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        // Escucha el evento de clic en el botón de avanzar de la columna3
-        $(".columna3 .carousel-control-next").on("click", function () {
-          // Avanza los carruseles en la columna3, columna4 y columna5
-          $("#Carrusel1, #Carrusel2, #Carrusel3, #Carrusel4, #Carrusel5, #Carrusel6, #Carrusel7").carousel("next");
-        });
-
-        // Escucha el evento de clic en el botón de retroceder de la columna3
-        $(".columna3 .carousel-control-prev").on("click", function () {
-          // Retrocede los carruseles en la columna3, columna4 y columna5
-          $("#Carrusel1, #Carrusel2, #Carrusel3, #Carrusel4, #Carrusel5, #Carrusel6, #Carrusel7").carousel("prev");
-        });
-      });
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
 
 </head>
 <body>
+  
+  {% if pagina_actual == 1 %}
 
     <!-- /* !_--__--__--__--__--__--__--__--__--_Start Grid _--__--__--__--__--__--__--__--__--__--_ */ -->
     <section class="box-section">
@@ -74,13 +61,10 @@
               <div id="Carrusel1" class="carousel slide" data-bs-touch="false">
                 <div class="carousel-inner">
                   <div class="carousel-item active c-item">
-                    <img src="/static/img/Fondo.jpg" class="d-block w-100 c-img" alt="...">
+                    <img src="/static/img/Peliculaspopulares.jpg" class="d-block w-100 c-img" alt="...">
                   </div>
                   <div class="carousel-item c-item">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="" class="d-block w-100 c-img" alt="...">
+                    <img src="/static/img/Seriespopulares.jpg" class="d-block w-100 c-img" alt="...">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#Carrusel1" data-bs-slide="prev">
@@ -99,13 +83,16 @@
               <div id="Carrusel2" class="carousel slide" data-bs-touch="false">
                 <div class="carousel-inner">
                   <div class="carousel-item active c-item2">
-                    <img src="{{ peliculas.2.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
+                    <img src="{{ peliculas.2.imagenes_adicionales.0 }}" class="d-block w-100 c-img2" alt="...">
+                    <div class="carousel-caption">
+                      <h5>{{peliculas.2.title}}</h5>
+                    </div>
                   </div>
                   <div class="carousel-item c-item2">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item2">
-                    <img src="" class="d-block w-100 c-img" alt="...">
+                    <img src="{{ series.2.imagenes_adicionales.0 }}" class="d-block w-100 c-img2" alt="...">
+                    <div class="carousel-caption">
+                      <h5>{{series.2.name}}</h5>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -114,37 +101,13 @@
             <!-- !Carrusel pelicula top 5 -->
 
             <div class="columna5">
-              <div id="Carrusel3" class="carousel slide" data-bs-touch="false">
-                <div class="carousel-inner">
-                  <div class="carousel-item active c-item">
-                    <img src="{{ peliculas.4.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <!-- !Carrusel pelicula top 4 -->
 
             <div class="columna6">
-              <div id="Carrusel4" class="carousel slide" data-bs-touch="false">
-                <div class="carousel-inner">
-                  <div class="carousel-item active c-item">
-                    <img src="{{ peliculas.3.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <!-- !Carrusel pelicula top 2 -->
@@ -155,14 +118,14 @@
                   <div class="carousel-item active c-item3">
                     <img src="{{ peliculas.1.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
                     <div class="carousel-caption">
-                      <h5>Third slide label</h5>
+                      <h5>{{peliculas.1.title}}</h5>
                     </div>
                   </div>
                   <div class="carousel-item c-item3">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item3">
-                    <img src="" class="d-block w-100 c-img" alt="...">
+                    <img src="{{ series.1.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
+                    <div class="carousel-caption">
+                      <h5>{{series.1.name}}</h5>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -180,10 +143,10 @@
                     </div>
                   </div>
                   <div class="carousel-item c-item3">
-                    <img src="" class="d-block w-100 c-img" alt="...">
-                  </div>
-                  <div class="carousel-item c-item3">
-                    <img src="" class="d-block w-100 c-img" alt="...">
+                    <img src="{{ series.0.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
+                    <div class="carousel-caption">
+                      <h5>{{series.0.name}}</h5>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -192,92 +155,86 @@
    </section>
    <!-- /* !_--__--__--__--__--__--__--__--__--_End Grid _--__--__--__--__--__--__--__--__--__--_ */ -->
 
-    <main>
+   
+   {% endif %}
+   <main>
+      <h1 class="titulo-pelis">PELÍCULAS POPULARES 😎</h1>
 
-        <h1 class="titulo-pelis" style="color: white; padding: 5px;">PELICULAS POPULARES 😎</h1>
-
-        <section class="seccion_contenido">
-            <div class="contenedor_contenidos">
-                {% for pelicula in peliculas %}
+      <section class="seccion_contenido">
+          <div class="contenedor_contenidos">
+              {% for pelicula in peliculas %}
                   <a href="{% url 'detalles_pelicula' pelicula.id %}">
-                    <article> 
-                      <div class="poster_pelicula">
-                        <img src="{{ pelicula.imagen_url }}" alt="Poster de la película">
-                      </div>
-
-                      <div class="imagen_vermas">
-                        <img src="/static/img/Lupa.png" alt="VER MÁS">
-                      </div>
-                    </article> 
-                  </a> 
-                {% endfor %}               
-            </div>
-
-            <div class="botones_ar">
+                      <article>
+                          <div class="poster_pelicula">
+                              <img loading="lazy" src="{{ pelicula.imagen_url }}" alt="Poster de la película">
+                          </div>
+                      
+                          <div class="imagen_vermas">
+                              <img loading="lazy" src="/static/img/Lupa.png" alt="VER MÁS">
+                          </div>
+                      </article>
+                  </a>
+              {% endfor %}
+          </div>
+          <div class="botones_ar">
               <button class="btn btn-light" onclick="irA('home', -1)">Retroceder</button>
               <button class="btn btn-light" onclick="irA('home', 1)">Avanzar</button>
-            </div>
-        </section>      
-        <script>
-            function irA(baseURL, incremento) {
-                // Obtener el número actual de la URL
-                var numeroActual = window.location.pathname.split('/')[2] || 1;
-                
-                // Calcular el nuevo número
-                var nuevoNumero = parseInt(numeroActual) + incremento;
-                
-                // Construir la nueva URL
-                var nuevaURL = '/' + baseURL + '/' + nuevoNumero;
+          </div>
+      </section>
 
-                // Redirigir a la nueva URL
-                window.location.href = nuevaURL;
-            }
-        </script>
 
-        <h1 class="titulo-pelis" style="color: white;">SERIES POPULARES 📺</h1>
+      <h1 class="titulo-pelis">SERIES POPULARES 📺</h1>
 
-        <section class="seccion_contenido">
-            <div class="contenedor_contenidos">
+      <section class="seccion_contenido">
+          <div class="contenedor_contenidos">
               {% for serie in series %}
-              <a href="{% url 'detalles_serie' serie.id %}">
-                <article>   
-                    <div class="poster_pelicula">
-                      <img src="{{ serie.imagen_url }}" alt="Poster de la serie">
-                    </div>
-                    <div class="imagen_vermas">
-                      <img src="/static/img/Lupa.png" alt="Esta democracia si sirve">
-                    </div>
-                </article>
-              </a>
-              {% endfor %}   
-            </div>
-
-            <div class="botones_ar">
+                  <a href="{% url 'detalles_serie' serie.id %}">
+                      <article>
+                          <div class="poster_pelicula">
+                              <img loading="lazy" src="{{ serie.imagen_url }}" alt="Poster de la serie">
+                          </div>
+                          <div class="imagen_vermas">
+                              <img loading="lazy" src="/static/img/Lupa.png" alt="Esta democracia sí sirve">
+                          </div>
+                      </article>
+                  </a>
+              {% endfor %}
+          </div>
+          <div class="botones_ar">
               <button class="btn btn-light" onclick="irA('home', -1)">Retroceder</button>
               <button class="btn btn-light" onclick="irA('home', 1)">Avanzar</button>
-            </div>
-        </section>
-        
-          <script>
-            function irA(baseURL, incremento) {
-                // Obtener el número actual de la URL
-                var numeroActual = window.location.pathname.split('/')[2] || 1;
-                
-                // Calcular el nuevo número
-                var nuevoNumero = parseInt(numeroActual) + incremento;
-    
-                // Asegurarse de que el nuevo número no sea menor que 1
-                nuevoNumero = Math.max(nuevoNumero, 1);
-                
-                // Construir la nueva URL
-                var nuevaURL = '/' + baseURL + '/' + nuevoNumero;
-    
-                // Redirigir a la nueva URL
-                window.location.href = nuevaURL;
-            }
-        </script>
-
+          </div>
+      </section>
     </main>
+
+    <script>
+        function irA(baseURL, incremento) {
+            var numeroActual = window.location.pathname.split('/')[2] || 1;
+            var nuevoNumero = parseInt(numeroActual) + incremento;
+            nuevoNumero = Math.max(nuevoNumero, 1);
+            var nuevaURL = '/' + baseURL + '/' + nuevoNumero;
+            window.location.href = nuevaURL;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Escucha el evento de clic en el botón de avanzar de la columna3
+        $(".columna3 .carousel-control-next").on("click", function () {
+          // Avanza los carruseles en la columna3, columna4 y columna5
+          $("#Carrusel1, #Carrusel2, #Carrusel5, #Carrusel6, #Carrusel7").carousel("next");
+        });
+
+        // Escucha el evento de clic en el botón de retroceder de la columna3
+        $(".columna3 .carousel-control-prev").on("click", function () {
+          // Retrocede los carruseles en la columna3, columna4 y columna5
+          $("#Carrusel1,#Carrusel2, #Carrusel5, #Carrusel6, #Carrusel7").carousel("prev");
+        });
+      });
+    </script>
 
 </body>
 </html>
