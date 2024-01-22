@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 import asyncio
 from asgiref.sync import async_to_sync
+import concurrent.futures
+
 
 def mostrar_colores(request):
     return render(request, 'colores.html')
@@ -37,8 +39,13 @@ def obtener_imagenes_adicionales(tmdb_id, tipo, base_url_imagen, headers, cantid
         return [f"{base_url_imagen}{img['file_path']}" for img in images_data.get('backdrops', [])[:cantidad]]
     else:
         return []
-    
 
+def obtener_imagenes_adicionales_paralelo(ids, tipo, base_url_imagen, headers, cantidad=1):
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        # Lanzar solicitudes en paralelo
+        resultados = list(executor.map(lambda tmdb_id: obtener_imagenes_adicionales(tmdb_id, tipo, base_url_imagen, headers, cantidad), ids))
+
+    return resultados
 
 def mostrar_home(request, pagina=1):
     try:
@@ -48,7 +55,6 @@ def mostrar_home(request, pagina=1):
 
     base_url_imagen = "https://image.tmdb.org/t/p/"
     base_url_imagen_w342 = f"{base_url_imagen}w342"
-    base_url_imagen_w500 = f"{base_url_imagen}w500"
     base_url_imagen_w780 = f"{base_url_imagen}w780"
 
     url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
@@ -65,24 +71,26 @@ def mostrar_home(request, pagina=1):
     datos_peliculas = solicitud_peliculas.json().get('results', [])[:10] if solicitud_peliculas.status_code == 200 else []
     datos_series = solicitud_series.json().get('results', [])[:10] if solicitud_series.status_code == 200 else []
 
-    for i in range(10):
-        dato_pelicula = datos_peliculas[i]
-        dato_pelicula['imagen_url'] = f"{'https://image.tmdb.org/t/p/w342'}{dato_pelicula.get('poster_path', '')}"
-        tmdb_id_pelicula = dato_pelicula.get('id', None)
-        if pagina == 1:
-            if i < 3:
-                dato_pelicula['imagenes_adicionales'] = obtener_imagenes_adicionales(tmdb_id_pelicula, 'movie', 'https://image.tmdb.org/t/p/w780', headers, cantidad=1)
-            else:
-                dato_pelicula['imagenes_adicionales'] = []
+    # Obtener todos los IDs de películas y series
+    ids_peliculas = [pelicula.get('id') for pelicula in datos_peliculas]
+    ids_series = [serie.get('id') for serie in datos_series]
 
-        dato_serie = datos_series[i]
-        dato_serie['imagen_url'] = f"{base_url_imagen_w342}{dato_serie.get('poster_path', '')}"
-        tmdb_id_serie = dato_serie.get('id', None)
+    # Obtener imágenes adicionales en paralelo
+    if pagina == 1:
+        imagenes_adicionales_peliculas = obtener_imagenes_adicionales_paralelo(ids_peliculas, 'movie', base_url_imagen_w780 , headers, cantidad=1)
+        imagenes_adicionales_series = obtener_imagenes_adicionales_paralelo(ids_series, 'tv', base_url_imagen_w780 , headers, cantidad=1)
+
+    # Asignar las imágenes adicionales a cada película y serie
+
+    for i, pelicula in enumerate(datos_peliculas):
+        pelicula['imagen_url'] = f"{base_url_imagen_w342}{pelicula.get('poster_path', '')}"
         if pagina == 1:
-            if i < 3:
-                dato_serie['imagenes_adicionales'] = obtener_imagenes_adicionales(tmdb_id_serie, 'tv', 'https://image.tmdb.org/t/p/w780' , headers, cantidad=1)
-            else:
-                dato_serie['imagenes_adicionales'] = []
+            pelicula['imagenes_adicionales'] = imagenes_adicionales_peliculas[i]
+
+    for i, serie in enumerate(datos_series):
+        serie['imagen_url'] = f"{base_url_imagen_w342}{serie.get('poster_path', '')}"
+        if pagina == 1:
+            serie['imagenes_adicionales'] = imagenes_adicionales_series[i]
 
     return render(request, 'home.html', {'peliculas': datos_peliculas, 'series': datos_series, 'pagina_actual': pagina})
 
