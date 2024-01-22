@@ -9,32 +9,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilo_home.css' %}">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        // Escucha el evento de clic en el botón de avanzar de la columna3
-        $(".columna3 .carousel-control-next").on("click", function () {
-          // Avanza los carruseles en la columna3, columna4 y columna5
-          $("#Carrusel1, #Carrusel2, #Carrusel3, #Carrusel4, #Carrusel5, #Carrusel6, #Carrusel7").carousel("next");
-        });
-
-        // Escucha el evento de clic en el botón de retroceder de la columna3
-        $(".columna3 .carousel-control-prev").on("click", function () {
-          // Retrocede los carruseles en la columna3, columna4 y columna5
-          $("#Carrusel1, #Carrusel2, #Carrusel3, #Carrusel4, #Carrusel5, #Carrusel6, #Carrusel7").carousel("prev");
-        });
-      });
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
 
 </head>
 <body>
-  
-  {% if pagina_actual == 1 %}
 
   {% if pagina_actual == 1 %}
 
@@ -128,44 +108,12 @@
 
             <div class="columna5">
               
-              <div id="Carrusel3" class="carousel slide" data-bs-touch="false">
-                <div class="carousel-inner">
-                  <div class="carousel-item active c-item">
-                    <img src="{{ peliculas.4.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
-                    <div class="carousel-caption">
-                      <h5>{{peliculas.4.title}}</h5>
-                    </div>
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="{{ series.4.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
-                    <div class="carousel-caption">
-                      <h5>{{series.4.name}}</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <!-- !Carrusel pelicula top 4 -->
 
             <div class="columna6">
               
-              <div id="Carrusel4" class="carousel slide" data-bs-touch="false">
-                <div class="carousel-inner">
-                  <div class="carousel-item active c-item">
-                    <img src="{{ peliculas.3.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
-                    <div class="carousel-caption">
-                      <h5>{{peliculas.3.title}}</h5>
-                    </div>
-                  </div>
-                  <div class="carousel-item c-item">
-                    <img src="{{ series.3.imagenes_adicionales.0 }}" class="d-block w-100 c-img" alt="...">
-                    <div class="carousel-caption">
-                      <h5>{{series.3.name}}</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <!-- !Carrusel pelicula top 2 -->
@@ -214,12 +162,9 @@
    <!-- /* !_--__--__--__--__--__--__--__--__--_End Grid _--__--__--__--__--__--__--__--__--__--_ */ -->
 
    
-   {% endif %}
+  {% endif %}
    <main>
       <h1 class="titulo-pelis">PELÍCULAS POPULARES 😎</h1>
-   
-   {% endif %}
-    <main>
 
       <section class="seccion_contenido">
           <div class="contenedor_contenidos">
