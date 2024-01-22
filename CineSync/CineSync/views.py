@@ -3,6 +3,8 @@ import requests
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+import asyncio
+from asgiref.sync import async_to_sync
 
 def mostrar_colores(request):
     return render(request, 'colores.html')
@@ -25,28 +27,32 @@ def mostrar_registro(request):
 			return redirect(to="inicio")
 	return render(request, 'registration/registro.html', data)
 
+
+def obtener_imagenes_adicionales(tmdb_id, tipo, base_url_imagen, headers, cantidad=1):
+    url = f'https://api.themoviedb.org/3/{tipo}/{tmdb_id}/images?api_key=fZd8qW3Bpej0Zea4Rz2OxSS6XLSNRGJW'
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        images_data = response.json()
+        return [f"{base_url_imagen}{img['file_path']}" for img in images_data.get('backdrops', [])[:cantidad]]
+    else:
+        return []
+    
+
+
 def mostrar_home(request, pagina=1):
-
-    """ -------------------------------------------------------------------------------------------------------------------
-        
-        * Convocamos la URL y los headers brindados por la API, las cuales dan especificaciones a python de cómo se almacena y muestra la información.
-
-        * Solicitamos los datos mediante la función requests y haciendo uso del metodo GET de HTTP.
-
-        * Le damos un valor predeterminado a la variable que almacenará los datos recibidos de la API en forma de lista.
-
-        * Definimos la pagina de peliculas-series mostradas. 
-
-    ------------------------------------------------------------------------------------------------------------------- """
-
     try:
         pagina = int(pagina)
     except ValueError:
         pagina = 1
 
+    base_url_imagen = "https://image.tmdb.org/t/p/"
+    base_url_imagen_w342 = f"{base_url_imagen}w342"
+    base_url_imagen_w500 = f"{base_url_imagen}w500"
+    base_url_imagen_w780 = f"{base_url_imagen}w780"
+
     url_peliculas = f"https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
     url_series = f"https://api.themoviedb.org/3/discover/tv?include_adult=true&include_video=false&language=es-ES&page={pagina}&sort_by=popularity.desc"
-
 
     headers = {
         "accept": "application/json",
@@ -56,50 +62,30 @@ def mostrar_home(request, pagina=1):
     solicitud_peliculas = requests.get(url_peliculas, headers=headers)
     solicitud_series = requests.get(url_series, headers=headers)
 
-    datos_peliculas = []
-    datos_series = []
+    datos_peliculas = solicitud_peliculas.json().get('results', [])[:10] if solicitud_peliculas.status_code == 200 else []
+    datos_series = solicitud_series.json().get('results', [])[:10] if solicitud_series.status_code == 200 else []
 
-    """ -------------------------------------------------------------------------------------------------------------------
+    for i in range(10):
+        dato_pelicula = datos_peliculas[i]
+        dato_pelicula['imagen_url'] = f"{'https://image.tmdb.org/t/p/w342'}{dato_pelicula.get('poster_path', '')}"
+        tmdb_id_pelicula = dato_pelicula.get('id', None)
+        if pagina == 1:
+            if i < 3:
+                dato_pelicula['imagenes_adicionales'] = obtener_imagenes_adicionales(tmdb_id_pelicula, 'movie', 'https://image.tmdb.org/t/p/w780', headers, cantidad=1)
+            else:
+                dato_pelicula['imagenes_adicionales'] = []
 
-        ?El código de estado HTTP 200 es un estándar que indica una respuesta exitosa a una solicitud. 
-        
-        *En este if se almacena la información en las variables 'datos_peliculas' y datos_series luego de confirmar que la solicitud fue exitosa.
-        *Esto se hace mediante el método 'json()', el cuál pasa los datos recibidos de formato JSON (Como esta almacenado en la API) al formato de una estructura de datos de python.
-
-        En las estructuras for se importan las imagenes 'cover' que se encuentran en urls diferentes a la de los datos 
-        anteriores. Se importan solo las versiones de calidad w500 para evitar lentitud en la carga de la pagina
-
-    ------------------------------------------------------------------------------------------------------------------- """
-
-    if solicitud_peliculas.status_code == 200:
-        datos_peliculas = solicitud_peliculas.json().get('results', [])
-
-    if solicitud_series.status_code == 200:
-        datos_series = solicitud_series.json().get('results', [])
-    
-    base_url_imagen = "https://image.tmdb.org/t/p/w500"
-
-    for dato in datos_peliculas:
-        if 'poster_path' in dato:
-            dato['imagen_url'] = f"{base_url_imagen}{dato['poster_path']}"
-        else:
-            dato['imagen_url'] = None
-
-    for dato in datos_series:
-        if 'poster_path' in dato:
-            dato['imagen_url'] = f"{base_url_imagen}{dato['poster_path']}"
-        else:
-            dato['imagen_url'] = None
-
-    """ -------------------------------------------------------------------------------------------------------------------
-
-        Devolemos la plantilla de HTML junto a un diccionario de clave única que sirve como nombre que se utilizará
-        para llamar a los datos en la estructura HTML, tanto de las series como de las peliculas y también el de la 
-        pagina por si se requiere mostrarlo. 
-
-    ------------------------------------------------------------------------------------------------------------------- """
+        dato_serie = datos_series[i]
+        dato_serie['imagen_url'] = f"{base_url_imagen_w342}{dato_serie.get('poster_path', '')}"
+        tmdb_id_serie = dato_serie.get('id', None)
+        if pagina == 1:
+            if i < 3:
+                dato_serie['imagenes_adicionales'] = obtener_imagenes_adicionales(tmdb_id_serie, 'tv', 'https://image.tmdb.org/t/p/w780' , headers, cantidad=1)
+            else:
+                dato_serie['imagenes_adicionales'] = []
 
     return render(request, 'home.html', {'peliculas': datos_peliculas, 'series': datos_series, 'pagina_actual': pagina})
+
 
 
 def mostrar_detalles(request, pelicula_id):

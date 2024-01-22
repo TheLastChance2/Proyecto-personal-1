@@ -53,7 +53,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap4" #Código de la extensión para estilizar for
 
 LOGIN_REDIRECT_URL = '/home/' #Redirige al usuario al HOME luego de iniciar sesión.
 
-LOGIN_URL = '/accounts/login/' #Redirige al usuario al formulario de inicio de sesión en caso de ser necesario.
+LOGIN_URL = '/accounts/login/'
+
+LOGOUT_REDIRECT_URL = '/home/'
+
+
+AUTHENTICATION_CLASSES = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,10 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'es-ar'
 
