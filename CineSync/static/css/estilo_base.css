@@ -13,7 +13,7 @@ body {
 }
     /* !---------------- Styles Navbar Css ---------------- */
 .navbar{
-    height: 15vh;
+    height: 100px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -57,9 +57,6 @@ body {
 }
 
 .nav-logo{
-    min-width: 3rem;
-    height: 4rem;
-    content:url(/static/img/LogoB.png);
     filter: drop-shadow(0px 0px 0px transparent);
     box-sizing: border-box;
     transition:  filter 1s ease, scale 2s ease, transform 0.8s ease;

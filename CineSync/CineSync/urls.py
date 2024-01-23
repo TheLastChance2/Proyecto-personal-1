@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('colores/', views.mostrar_colores),
-    path('', views.mostrar_home, name='mostrar_home'),
+    path('', views.mostrar_cargando),
     path('home/', views.mostrar_home, name='mostrar_home'),
     path('home/<int:pagina>/', views.mostrar_home, name='mostrar_home_pagina'),
     path('detalles/<int:pelicula_id>/', views.mostrar_detalles, name='detalles_pelicula'),
@@ -20,6 +20,8 @@ urlpatterns = [
     path('base/', views.mostrar_base),
     path('', include('apps.perfil.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('preparando/', views.mostrar_cargando),
+    path('categorias/', views.mostrar_categorias),
 ]
 
 if settings.DEBUG:

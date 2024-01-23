@@ -14,15 +14,37 @@
 </head>
 <body>
     <main>
-        <header style="width: 1050px; height: 700px; background-size: cover; background-position: center; background-image: url(https://image.tmdb.org/t/p/original{{ imagenes.0.file_path }});">
-            
-        </header> 
         <section class="seccion2">
-            <p>hola</p>
+            <h1>Titulo: {{ pelicula.title }}</h1>
+            <p>Sinopsis: {{ pelicula.overview }}</p>
+            <p>Generos: {% for genre in pelicula.genres %} ● {{ genre.name }} {% endfor %}</p>
+            <p><strong>Fecha de Creación:</strong> {{ pelicula.release_date }}</p>
+        
+            <h5>POSTER</h5>
+
+            <img style="height: 250px;" src="{{ pelicula.imagen_url }}">
+
+            <hr>
+
+            <h5>IMAGENES PREVIAS</h5>
+        
+            {% for imagen in imagenes %}
+                <img loading="lazy" style="height: 100px;"  src="https://image.tmdb.org/t/p/original{{ imagen.file_path }}" alt="Imagen Adicional">
+            {% endfor %}
+
+            <hr>
+
+            <h5>REPARTO</h5>
+                
+            {% for actor in reparto %}
+                <div>
+                    <img src="{{ actor.profile_image }}" alt="{{ actor.name }}">
+                    <p>{{ actor.name }}</p>
+                </div>
+            {% endfor %}  
+
+
         </section>   
-        <section class="seccion3">
-            <p>hola</p>
-        </section> 
     </main>
 </body>
 </html>

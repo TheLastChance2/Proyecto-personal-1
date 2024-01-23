@@ -12,6 +12,7 @@ body{
     align-items: center;
     flex-direction: column;
 }
+
 /* !_--__--__--__--__--__--__--__--__--_Start Grid _--__--__--__--__--__--__--__--__--__--_ */
 .box-section {
     width: 100%;
@@ -436,6 +437,31 @@ article:hover .imagen_vermas img{
     transition: transform 0.3s ease;
 }
 
+.c-item4{
+    height: 135px;
+    z-index: -1;
+    border-radius: 6px;
+}
+
+.c-item4 .imagen-grid{
+    height: 131px; 
+    transition: transform 0.3s ease;  
+}
+
+.columna5 .imagen-grid{
+    height: 100%; 
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.imagen-grid:hover{
+    transform: scale(1.1);
+}
+
+.carousel-inner:hover .c-item4 .imagen-grid{
+    transform: scale(1.1);
+}
+
 .carousel-inner:hover .c-item .c-img {
     transform: scale(1.2);
 }
@@ -488,4 +514,5 @@ article:hover .imagen_vermas img{
 .titulo-pelis {
     font-family: 'Rajdhani', sans-serif;
 }
+
 
